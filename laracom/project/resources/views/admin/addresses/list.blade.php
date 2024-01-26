@@ -26,7 +26,6 @@
                         <tbody>
                         @foreach ($addresses as $address)
                             <tr>
-                                <!-- <td><a href="{{ route('admin.customers.show', [$address->id]) }}">{{ $address->alias }}</a></td> -->
                                 <td><a href="{{ route('admin.addresses.show', $address->id) }}">{{ $address->alias }}</a></td>
                                 <td>{{ $address->address_1 }}</td>
                                 <td>{{ $address->country }}</td>
