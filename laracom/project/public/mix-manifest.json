@@ -1,8 +1,8 @@
 {
-    "/css/admin.min.css": "/css/admin.min.css",
-    "/js/admin.min.js": "/js/admin.min.js",
-    "/css/style.min.css": "/css/style.min.css",
-    "/js/front.min.js": "/js/front.min.js",
-    "/js/scripts.js": "/js/scripts.js",
-    "/js/custom.js": "/js/custom.js"
+    "/css/admin.min.css": "/css/admin.min.css?id=7d899509ddeff0b329c3",
+    "/js/admin.min.js": "/js/admin.min.js?id=2632765de3e704767cf1",
+    "/css/style.min.css": "/css/style.min.css?id=d4e93679d49177011e1c",
+    "/js/front.min.js": "/js/front.min.js?id=f0dc68731079686d095e",
+    "/js/scripts.js": "/js/scripts.js?id=242d930a88232b3829a5",
+    "/js/custom.js": "/js/custom.js?id=5038f321a01013d5c5e8"
 }

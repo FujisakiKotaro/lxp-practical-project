@@ -37,7 +37,7 @@ body {
     font-size: 15px;
     line-height: 27px;
     font-color: black;
-    margin-bottom: 170px;
+    margin-bottom: 250px;   /* 170→250に修正 */
 }
 ::-moz-selection {
     background: #222;
@@ -524,8 +524,6 @@ textarea, select {
     position: absolute;
     bottom: 0;
     width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 60px;
     background-color: #f5f5f5;
 }
 
@@ -587,6 +585,7 @@ a:hover img {
 }
 .form-inline #search-btn {
     border-top: 1px solid #d89522;
+    border-top: 1px solid #d89522;
     border-right: 1px solid #d89522;
     border-bottom: 1px solid #d89522;
     border-left: 1px solid #d8cab2;
@@ -598,6 +597,57 @@ a:hover img {
 
 .product-description {
     position: relative;
+}
+
+.pr oduct-total-price{
+    margin: 2em 0;
+}
+
+.product-total-price{
+    font-size: 36px;
+    color: #bf0000;
+}
+
+.product-total-price .price small{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.product-total-price .shipping{
+    font-size: 18px;
+    font-weight: bold;
+    color: #52575d;
+}
+
+.shipping{
+    color: #bf0000;
+}
+
+@media(max-width: 320px){
+    .product-total-price .shipping{
+        display: block;
+    }
+}
+
+@media(min-width: 480px){
+    .form-group{
+        display: inline-block;
+        width: auto;
+    }
+}
+
+.add-cart-btn{
+    width: 227px;
+}
+
+@media(min-width: 480px){
+    .add-cart-btn{
+        width: 100%;
+    }
+}
+
+.test02{
+    color: #bf0000;
 }
 
 .excerpt {
@@ -621,9 +671,11 @@ a:hover img {
 
 .modal-dialog .description,
 .modal-dialog .excerpt {
-    font-size: 14px;
+    /* font-size: 14px; */
+    font-size: 50px;
     line-height: 16px;
     text-align: left;
+    color: red;
 }
 
 .modal-dialog .description {
