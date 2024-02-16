@@ -31,12 +31,9 @@
     </div>
     <div class="col-md-6">
         <div class="product-description">
-            <h1>{{ $product->name }}</h1>
-            <div class="product-total-price">
-                <span class="price">{{number_format($product->price * config('cart.usd_to_jpy_rate'))}} <small>{{config('cart.currency_symbol')}} </small> </span>
-                <span class="shipping"> +送料 {{config('cart.shipping_cost')}} {{config('cart.currency_symbol')}} </span>
-            </div>
-            <p>SKU : {{$product->sku}} </p>
+            <h1>{{ $product->name }}
+                <small>{{ config('cart.currency') }} {{ $product->price }}</small>
+            </h1>
             <div class="description">{!! $product->description !!}</div>
             <hr>
             <div class="row">
@@ -65,13 +62,12 @@
                             </div>
                             <hr>
                         @endif
-                        <div>数量</div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="quantity" id="quantity"
-                                placeholder="数量を入力してください" value="{{ old('quantity') }}" />
+                                placeholder="Quantity" value="{{ old('quantity') }}" />
                             <input type="hidden" name="product" value="{{ $product->id }}" />
                         </div>
-                        <button type="submit" class="btn btn-warning"><i class="fa fa-cart-plus"></i> かごに追加
+                        <button type="submit" class="btn btn-warning"><i class="fa fa-cart-plus"></i> Add to cart
                         </button>
                     </form>
                 </div>
