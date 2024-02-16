@@ -37,7 +37,7 @@ body {
     font-size: 15px;
     line-height: 27px;
     font-color: black;
-    margin-bottom: 250px;   /* 170→250に修正 */
+    margin-bottom: 170px;
 }
 ::-moz-selection {
     background: #222;

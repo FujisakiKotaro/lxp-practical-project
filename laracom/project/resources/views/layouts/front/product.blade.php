@@ -32,7 +32,6 @@
     <div class="col-md-6">
         <div class="product-description">
             <h1>{{ $product->name }}</h1>
-            <!-- 以下変更箇所 -->
             <div class="product-total-price">
                 <span class="price">{{number_format($product->price * config('cart.usd_to_jpy_rate'))}} <small>{{config('cart.currency_symbol')}} </small> </span>
                 <span class="shipping"> +送料 {{config('cart.shipping_cost')}} {{config('cart.currency_symbol')}} </span>
