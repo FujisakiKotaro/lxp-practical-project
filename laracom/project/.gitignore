@@ -25,3 +25,6 @@ Envoy.blade.php
 \.php_cs\.cache
 public/css
 public/js
+
+# debugbarをgithubに上げないように修正
+/storage/debugbar
