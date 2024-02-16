@@ -1,5 +1,4 @@
 <div class="row">
-    <div class="product-total-price">test1</div>
     <div class="col-md-6">
         @if (!empty($product->cover))
             <ul id="thumbnails" class="col-md-4 list-unstyled">
@@ -66,7 +65,7 @@
                             </div>
                             <hr>
                         @endif
-                        <div class="test02">数量</div>
+                        <div>数量</div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="quantity" id="quantity"
                                 placeholder="数量を入力してください" value="{{ old('quantity') }}" />
