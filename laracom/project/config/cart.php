@@ -1,7 +1,5 @@
 <?php
 
-use App\Shop\Carts\ShoppingCart;
-
 return [
 
     /*
@@ -66,10 +64,7 @@ return [
 
     ],
 
-    'currency' => env('DEFAULT_CURRENCY', 'JPY'),
-    'currency_symbol' => env('CURRENCY_SYMBOL', '円'),
-
-    'shipping_cost' => 980,
-    'usd_to_jpy_rate' => 140,
+    'currency' => env('DEFAULT_CURRENCY', 'USD'),
+    'currency_symbol' => env('CURRENCY_SYMBOL', '$')
 
 ];
