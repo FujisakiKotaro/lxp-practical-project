@@ -24,8 +24,6 @@ Envoy.blade.php
 /coverage
 \.php_cs\.cache
 public/css
-/public/fonts
-/public/img
 /public/images
 /public/fonts/vendor
 /public/css/app.css
