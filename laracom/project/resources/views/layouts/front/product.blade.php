@@ -74,6 +74,44 @@
                         <button type="submit" class="btn btn-warning"><i class="fa fa-cart-plus"></i> かごに追加
                         </button>
                     </form>
+                    <div class="review_corner">ここにレビュー機能が入ります
+                        <!-- 評価・コメントの一覧を表示 -->
+                        <div class="review_list" style="display:flex;">
+                            @for($i = 0; $i < 3; $i++)
+                            <div style="color:#eef525;font-size:30px;">★</div>
+                            @endfor
+                            @for($i = 0; $i < (5-3); $i++)
+                            <div style="color:#eef525;font-size:30px;">☆</div>
+                            @endfor
+                            
+                        </div>
+                        <!-- 評価・コメントの入力(ログインしているときのみ) -->
+                        @auth
+                        <div>
+
+                            @php
+                            $test1 = 1;
+                            @endphp
+                            @for($i =0; $i < 5; $i++)
+
+                            @endfor
+                            {{$test1}}
+
+                            <form>
+                            <div><span class="evaluation">評価</span><span class="comment">コメント</span></div>
+                            <div><span class="review_rank"><select name="review_rank" id="review_rank">
+                                <option value="rank_5">5</option>
+                                <option value="rank_4">4</option>
+                                <option value="rank_3">3</option>
+                                <option value="rank_2">2</option>
+                                <option value="rank_1">1</option>
+                            </select></span>
+                            <span class="review_comment"><input type="text" id="review_comment"></span>
+                            </div>
+                            </form>
+                        </div>
+                        @endauth
+                    </div>
                 </div>
             </div>
         </div>

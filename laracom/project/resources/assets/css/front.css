@@ -705,3 +705,25 @@ a:hover img {
 #productAttribute {
     width: 312px;
 }
+
+/* EC：レビュー機能を開発しましょう（フロント画面） */
+.evaluation{
+    width: 20%;
+}
+.comment{
+    margin-left: 5em;
+    color: red;
+}
+/* .review_rank{
+    width:20%;
+} */
+#review_rank{
+    width:20%;
+    border: 1px solid black;
+    border-radius: 0 !important;
+}
+#review_comment{
+    width:75%;
+    border: 1px solid black;
+    border-radius: 0 !important;
+}
