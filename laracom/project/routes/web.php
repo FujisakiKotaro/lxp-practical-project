@@ -11,6 +11,7 @@
 |
 */
 
+// use App\Http\Controllers\Front\ReviewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -101,4 +102,11 @@ Route::namespace('Front')->group(function () {
     Route::get("category/{slug}", 'CategoryController@getCategory')->name('front.category.slug');
     Route::get("search", 'ProductController@search')->name('search.product');
     Route::get("{product}", 'ProductController@show')->name('front.get.product');
+
+    // reviewのルーティング
+    Route::get("{product}", 'ReviewController@show')->name('front.get.product');// レビュー一覧を表示するためのルート
+
+    // 新しいレビューを追加するためのルート
+    Route::post('/{product}', 'reviewController@add')->name('front.post.product');
+
 });

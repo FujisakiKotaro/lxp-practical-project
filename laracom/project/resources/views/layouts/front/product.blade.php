@@ -74,39 +74,46 @@
                         <button type="submit" class="btn btn-warning"><i class="fa fa-cart-plus"></i> かごに追加
                         </button>
                     </form>
-                    <div class="review_corner">ここにレビュー機能が入ります
+                    <div class="review_corner">
                         <!-- 評価・コメントの一覧を表示 -->
+                        @if(isset($reviews))
                         <div class="review_list" style="display:flex;">
-                            @for($i = 0; $i < 3; $i++)
-                            <div style="color:#eef525;font-size:30px;">★</div>
-                            @endfor
-                            @for($i = 0; $i < (5-3); $i++)
-                            <div style="color:#eef525;font-size:30px;">☆</div>
-                            @endfor
-                            
+                            <div>
+                            @foreach($reviews as $review)
+                                <div style="display:flex; margin-top: 10px;">
+                                    <!-- 星の記述 -->
+                                    @for($i = 0; $i < $review->rank; $i++)
+                                    <div style="color:#eef525;font-size:30px;">★</div>
+                                    @endfor
+                                    @for($i = 0; $i < (5 - $review->rank); $i++)
+                                    <div style="color:#eef525;font-size:30px;">☆</div>
+                                    @endfor
+                                </div>
+                                <div class="product_explanation">{{$review->comment}}</div>
+                            @endforeach
+                            </div>
                         </div>
+                        @else
+                        <div>reviewsを取得できていません</div>
+                        @endif
                         <!-- 評価・コメントの入力(ログインしているときのみ) -->
                         @auth
-                        <div>
-
-                            @php
-                            $test1 = 1;
-                            @endphp
-                            @for($i =0; $i < 5; $i++)
-
-                            @endfor
-                            {{$test1}}
-
-                            <form>
+                        <div style="margin-top: 10px;">
+                            <form id="review_form" action="{{ route('front.post.product', ['product' => $product->slug]) }}" method="post">
+                            @csrf
                             <div><span class="evaluation">評価</span><span class="comment">コメント</span></div>
-                            <div><span class="review_rank"><select name="review_rank" id="review_rank">
-                                <option value="rank_5">5</option>
-                                <option value="rank_4">4</option>
-                                <option value="rank_3">3</option>
-                                <option value="rank_2">2</option>
-                                <option value="rank_1">1</option>
-                            </select></span>
-                            <span class="review_comment"><input type="text" id="review_comment"></span>
+                            <div>
+                                <span >
+                                    <select name="rank"class="review_rank">
+                                        <option value="rank_5">5</option>
+                                        <option value="rank_4">4</option>
+                                        <option value="rank_3">3</option>
+                                        <option value="rank_2">2</option>
+                                        <option value="rank_1">1</option>
+                                    </select>
+                                </span>
+                                <span><input type="text" maxlength="100" class="review_comment" name="comment"></span>
+                                <span><input id="review_submit" type="submit" value="登録" /></span>
                             </div>
                             </form>
                         </div>
@@ -128,5 +135,21 @@
                 inlinePane: false
             });
         });
+        //フォームが無効な場合にdisableとする処理
+        document.addEventListener('DOMContentLoaded', function () {
+            var form = document.getElementById('review_form');
+            var submitBtn = document.getElementById('review_submit');
+
+            form.addEventListener('input', function () {
+                // フォームが有効な場合
+                if (form.checkValidity()) {
+                    submitBtn.removeAttribute('disabled');
+                } else {
+                    // フォームが無効な場合
+                    submitBtn.setAttribute('disabled', 'disabled');
+                }
+            });
+        });
+
     </script>
 @endsection
