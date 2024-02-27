@@ -156,9 +156,5 @@
                 }
             });
         });
-
-        //formの送信が完了したらalertを出す
-        
-
     </script>
 @endsection

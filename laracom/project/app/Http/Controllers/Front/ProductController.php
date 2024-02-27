@@ -64,7 +64,7 @@ class ProductController extends Controller
 
         //productIDから商品のレビューを取得
         $reviews = new Review();
-        $reviews = $reviews->where('productID', $productID)->get();
+        $reviews = $reviews->where('productID', $productID)->latest()->take(10)->get();
 
         return view('front.products.product', compact(
             'product',
@@ -80,9 +80,7 @@ class ProductController extends Controller
         try {
             $product = $this->productRepo->findProductBySlug(['slug' => $slug]);
         } catch (ModelNotFoundException $e) {
-            // abort(404, 'Product not found');//商品が見つからない場合には404エラー
             echo 'Product Not Found';
-            var_dump('er');
             return;
         }
         $productID = $product->id;//productIDの取得
@@ -95,6 +93,6 @@ class ProductController extends Controller
         $add_data->comment = $request->input('comment');
         $add_data->save();// データベースに挿入
 
-        return redirect()->back()->with('success', 'Review added successfully');
+        return redirect()->back()->with('success', '評価とコメントを登録しました');
     }
 }
