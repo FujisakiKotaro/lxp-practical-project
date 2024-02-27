@@ -105,17 +105,22 @@
                             <div>
                                 <span >
                                     <select name="rank"class="review_rank">
-                                        <option value="rank_5">5</option>
-                                        <option value="rank_4">4</option>
-                                        <option value="rank_3">3</option>
-                                        <option value="rank_2">2</option>
-                                        <option value="rank_1">1</option>
+                                        <option value="5">5</option>
+                                        <option value="4">4</option>
+                                        <option value="3">3</option>
+                                        <option value="2">2</option>
+                                        <option value="1">1</option>
                                     </select>
                                 </span>
-                                <span><input type="text" maxlength="100" class="review_comment" name="comment"></span>
+                                <span><input type="text" maxlength="100" class="review_comment" name="comment" /></span>
                                 <span><input id="review_submit" type="submit" value="登録" /></span>
                             </div>
                             </form>
+                            @if(session('success'))
+                                <script>
+                                    alert("{{ session('success') }}");
+                                </script>
+                            @endif
                         </div>
                         @endauth
                     </div>
@@ -146,10 +151,14 @@
                     submitBtn.removeAttribute('disabled');
                 } else {
                     // フォームが無効な場合
+                    console.log('Button is disabled');
                     submitBtn.setAttribute('disabled', 'disabled');
                 }
             });
         });
+
+        //formの送信が完了したらalertを出す
+        
 
     </script>
 @endsection

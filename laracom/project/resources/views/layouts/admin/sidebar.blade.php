@@ -114,6 +114,7 @@
                     <li><a href="{{ route('admin.order-statuses.create') }}"><i class="fa fa-plus"></i> Create order status</a></li>
                 </ul>
             </li>
+            <li>    </li>
             <li class="header">DELIVERY</li>
             <li class="treeview @if(request()->segment(2) == 'couriers') active @endif">
                 <a href="#">

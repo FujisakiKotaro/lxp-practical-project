@@ -104,9 +104,9 @@ Route::namespace('Front')->group(function () {
     Route::get("{product}", 'ProductController@show')->name('front.get.product');
 
     // reviewのルーティング
-    Route::get("{product}", 'ReviewController@show')->name('front.get.product');// レビュー一覧を表示するためのルート
+    Route::get("/{product}", 'ProductController@show')->name('front.get.product');// レビュー一覧を表示するためのルート
 
     // 新しいレビューを追加するためのルート
-    Route::post('/{product}', 'reviewController@add')->name('front.post.product');
+    Route::post('/{product}', 'ProductController@add_review')->name('front.post.product');
 
 });
