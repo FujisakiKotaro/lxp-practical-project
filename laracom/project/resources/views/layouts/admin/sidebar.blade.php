@@ -90,6 +90,22 @@
                     </li>
                 </ul>
             </li>
+
+            <!-- Reviewを追加 -->
+            <li class="header">REVIEW</li>
+            <li class="treeview @if(request()->segment(2) == 'orders') active @endif">
+                <a href="#">
+                    <i class="fa fa-money"></i> <span>Reviews</span>
+                    <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('admin.orders.index') }}"><i class="fa fa-circle-o"></i> List orders</a></li>
+                </ul>
+            </li>
+
+
             <li class="header">ORDERS</li>
             <li class="treeview @if(request()->segment(2) == 'orders') active @endif">
                 <a href="#">
@@ -114,7 +130,6 @@
                     <li><a href="{{ route('admin.order-statuses.create') }}"><i class="fa fa-plus"></i> Create order status</a></li>
                 </ul>
             </li>
-            <li>    </li>
             <li class="header">DELIVERY</li>
             <li class="treeview @if(request()->segment(2) == 'couriers') active @endif">
                 <a href="#">
