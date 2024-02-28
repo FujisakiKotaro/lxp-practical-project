@@ -13,11 +13,11 @@ class Review extends Model
     }
 
     //入力された評価コメントをDBに追加
-    public function add($product_id, $userID, $rank, $comment){
+    public function add($product_id, $user_id, $rank, $comment){
         // 新しいレビューをデータベースに追加
         self::create([
             'product_id' => $product_id,
-            'userID' => $userID,
+            'user_id' => $user_id,
             'rank' => $rank,
             'comment' => $comment,
         ]);

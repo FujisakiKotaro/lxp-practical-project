@@ -9,6 +9,7 @@ use App\Shop\Reviews\Review;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ReviewController extends Controller{
 
@@ -25,16 +26,16 @@ class ReviewController extends Controller{
             $slug = $request->input('slug');
             $product = $this->productRepo->findProductBySlug(['slug' => $slug]);
         } catch (ModelNotFoundException $e) {
-            echo 'Product Not Found';
+            Log::error('Product Not Found');// NOTE: postmanによる確認のために一時的に標準出力してます。
             return;
         }
         $product_id = $product->id;//product_idの取得
-        $id = Auth::id();//userIDの取得
+        $userId = Auth::id();//userIDの取得
 
         $add_data = new Review();//クエリを作成
         $add_data->rank = $request->input('rank');
         $add_data->product_id = $product_id;
-        $add_data->user_id = $id;
+        $add_data->user_id = $userId;
         $add_data->comment = $request->input('comment');
         $add_data->save();// データベースに挿入
 

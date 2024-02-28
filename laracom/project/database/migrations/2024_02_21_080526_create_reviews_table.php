@@ -19,15 +19,17 @@ class CreateReviewsTable extends Migration
             
             // productID 列のデータ型を integer に指定
             $table->unsignedInteger('product_id')->index();
-            $table->foreign('product_id')->references('id')->on('products'); //外部制約
             
             // userID 列のデータ型も integer に指定
             $table->unsignedInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('customers'); //外部制約
             
             $table->integer('rank');
             $table->text('comment');
             $table->timestamps();
+
+            // 外部制約
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('user_id')->references('id')->on('customers');
         });
     }
 
