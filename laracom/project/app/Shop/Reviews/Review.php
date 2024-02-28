@@ -9,7 +9,7 @@ class Review extends Model
     protected $hidden = [];
     public function list(){
         $reviews = self::all();
-        return view('reviews.list', ['reviews' => $reviews]);
+        return ['reviews' => $reviews];
     }
 
     //入力された評価コメントをDBに追加

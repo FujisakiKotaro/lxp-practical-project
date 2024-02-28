@@ -5,11 +5,8 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Shop\Products\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Shop\Reviews\Review;
-// use GuzzleHttp\Psr7\Request;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class ReviewController extends Controller{
 
@@ -21,14 +18,8 @@ class ReviewController extends Controller{
     }
 
     //入力された評価コメントをDBに追加
-    public function store(Request $request){
-        try {
-            $slug = $request->input('slug');
-            $product = $this->productRepo->findProductBySlug(['slug' => $slug]);
-        } catch (ModelNotFoundException $e) {
-            Log::error('Product Not Found');// NOTE: postmanによる確認のために一時的に標準出力してます。
-            return;
-        }
+    public function store(Request $request, string $slug){
+        $product = $this->productRepo->findProductBySlug(['slug' => $slug]);
         $product_id = $product->id;//product_idの取得
         $userId = Auth::id();//userIDの取得
 

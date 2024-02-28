@@ -106,6 +106,6 @@ Route::namespace('Front')->group(function () {
     Route::get("{product}", 'ProductController@show')->name('front.get.product');
 
     // 新しいレビューを追加するためのルート
-    Route::post('/review', 'ReviewController@store')->name('front.post.product');
+    Route::post('/review/{product}', 'ReviewController@store')->name('front.post.product');
 
 });
