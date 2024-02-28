@@ -11,19 +11,6 @@ class CreateReviewsTable extends Migration
      *
      * @return void
      */
-    // public function up()
-    // {
-    //     Schema::create('reviews', function (Blueprint $table) {
-    //         $table->increments('id');
-    //         $table->foreignId('productID')->constrained('products');
-    //         $table->foreignId('userID')->constrained('customers');
-    //         // $table->increments('productID');
-    //         // $table->increments('userID');
-    //         $table->integer('rank');
-    //         $table->text('comment');
-    //         $table->timestamps();
-    //     });
-    // }
 
     public function up()
     {
@@ -31,10 +18,12 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             
             // productID 列のデータ型を integer に指定
-            $table->unsignedInteger('productID')->index();
+            $table->unsignedInteger('product_id')->index();
+            $table->foreign('product_id')->references('id')->on('products'); //外部制約
             
             // userID 列のデータ型も integer に指定
-            $table->unsignedInteger('userID')->index();
+            $table->unsignedInteger('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('customers'); //外部制約
             
             $table->integer('rank');
             $table->text('comment');

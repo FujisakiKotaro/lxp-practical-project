@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Shop\Products\Transformations\ProductTransformable;
 use App\Shop\Reviews\Review;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-// use GuzzleHttp\Psr7\Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,11 +59,11 @@ class ProductController extends Controller
         $category = $product->categories()->first();
         $productAttributes = $product->attributes;
 
-        $productID = $product->id;
+        $product_id = $product->id;
 
-        //productIDから商品のレビューを取得
+        //product_idから商品のレビューを取得
         $reviews = new Review();
-        $reviews = $reviews->where('productID', $productID)->latest()->take(10)->get();
+        $reviews = $reviews->where('product_id', $product_id)->latest()->take(10)->get();
 
         return view('front.products.product', compact(
             'product',
@@ -73,26 +72,5 @@ class ProductController extends Controller
             'category',
             'reviews'
         ));
-    }
-
-    //入力された評価コメントをDBに追加
-    public function add_review(string $slug, Request $request){
-        try {
-            $product = $this->productRepo->findProductBySlug(['slug' => $slug]);
-        } catch (ModelNotFoundException $e) {
-            echo 'Product Not Found';
-            return;
-        }
-        $productID = $product->id;//productIDの取得
-        $id = Auth::id();//userIDの取得
-
-        $add_data = new Review();//クエリを作成
-        $add_data->rank = $request->input('rank');
-        $add_data->productID = $productID;
-        $add_data->userID = $id;
-        $add_data->comment = $request->input('comment');
-        $add_data->save();// データベースに挿入
-
-        return redirect()->back()->with('success', '評価とコメントを登録しました');
     }
 }

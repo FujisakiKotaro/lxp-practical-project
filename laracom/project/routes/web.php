@@ -15,6 +15,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Http\Request;
+
 /**
  * Admin routes
  */
@@ -103,10 +105,7 @@ Route::namespace('Front')->group(function () {
     Route::get("search", 'ProductController@search')->name('search.product');
     Route::get("{product}", 'ProductController@show')->name('front.get.product');
 
-    // reviewのルーティング
-    Route::get("/{product}", 'ProductController@show')->name('front.get.product');// レビュー一覧を表示するためのルート
-
     // 新しいレビューを追加するためのルート
-    Route::post('/{product}', 'ProductController@add_review')->name('front.post.product');
+    Route::post('/review', 'ReviewController@store')->name('front.post.product');
 
 });
