@@ -10,6 +10,7 @@ use App\Shop\Reviews\Review;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Psy\Readline\Hoa\Console;
 
 class ProductController extends Controller
 {
@@ -65,10 +66,13 @@ class ProductController extends Controller
         $reviews = new Review();
         $reviews = $reviews->where('product_id', $product_id)->latest()->take(10)->get();
 
-        $stars = [];
+        $stars = '';
         foreach($reviews as $review){
-            $stars = $this->generateStarRatingsHtml($review->rank);
+            $stars .= $this->generateStarRatingsHtml($review->rank);
         }
+
+        // var_dump($stars);
+        // echo $stars;
 
         return view('front.products.product', compact(
             'product',
@@ -85,13 +89,18 @@ class ProductController extends Controller
     {
         $starHtml = '';
         for ($i = 0; $i < $rank; $i++) {
-            $starHtml .= '<div style="color:#eef525;font-size:30px;">★</div>';
-            // $starHtml .= '★';
+            // $starHtml .= '<div style="color:#eef525;font-size:30px;">★</div>';
+            $starHtml .= '★';
         }
         for ($i = 0; $i < (5 - $rank); $i++) {
-            $starHtml .= '<div style="color:#eef525;font-size:30px;">☆</div>';
-            // $starHtml .= '☆';
+            // $starHtml .= '<div style="color:#eef525;font-size:30px;">☆</div>';
+            $starHtml .= '☆';
         }
-        return '<div style="display:flex; margin-top: 10px;">' . $starHtml . '</div>';
+        // for ($i = 1; $i <= 5; $i++) {
+        //     // $starHtml .= '<div style="color:#eef525;font-size:30px;">' . ($i <= $rank ? '★' : '☆') . '</div>';
+        //     $starHtml .= $i <= $rank ? '★' : '☆';
+        // }
+        // return '<div style="display:flex; margin-top: 10px;">' . $starHtml . '</div>';
+        return $starHtml;
     }
 }
