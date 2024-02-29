@@ -79,17 +79,12 @@
                         @if(isset($reviews))
                         <div class="review_list" style="display:flex;">
                             <div>
-                            @foreach($reviews as $review)
+                            @foreach($reviews as $key => $review)
                                 <div style="display:flex; margin-top: 10px;">
                                     <!-- 星の記述 -->
-                                    @for($i = 0; $i < $review->rank; $i++)
-                                    <div style="color:#eef525;font-size:30px;">★</div>
-                                    @endfor
-                                    @for($i = 0; $i < (5 - $review->rank); $i++)
-                                    <div style="color:#eef525;font-size:30px;">☆</div>
-                                    @endfor
+                                    <div>{{ $stars[$key] }}</div>
+                                    <div class="product_explanation">{{$review->comment}}</div>
                                 </div>
-                                <div class="product_explanation">{{$review->comment}}</div>
                             @endforeach
                             </div>
                         </div>

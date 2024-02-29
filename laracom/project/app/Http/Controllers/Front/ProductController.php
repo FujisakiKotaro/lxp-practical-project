@@ -65,12 +65,33 @@ class ProductController extends Controller
         $reviews = new Review();
         $reviews = $reviews->where('product_id', $product_id)->latest()->take(10)->get();
 
+        $stars = [];
+        foreach($reviews as $review){
+            $stars = $this->generateStarRatingsHtml($review->rank);
+        }
+
         return view('front.products.product', compact(
             'product',
             'images',
             'productAttributes',
             'category',
-            'reviews'
+            'reviews',
+            'stars'
         ));
+    }
+
+    // 星評価のHTMLを生成するヘルパー関数
+    private function generateStarRatingsHtml($rank)
+    {
+        $starHtml = '';
+        for ($i = 0; $i < $rank; $i++) {
+            $starHtml .= '<div style="color:#eef525;font-size:30px;">★</div>';
+            // $starHtml .= '★';
+        }
+        for ($i = 0; $i < (5 - $rank); $i++) {
+            $starHtml .= '<div style="color:#eef525;font-size:30px;">☆</div>';
+            // $starHtml .= '☆';
+        }
+        return '<div style="display:flex; margin-top: 10px;">' . $starHtml . '</div>';
     }
 }
