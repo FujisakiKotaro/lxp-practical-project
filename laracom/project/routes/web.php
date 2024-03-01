@@ -11,8 +11,11 @@
 |
 */
 
+// use App\Http\Controllers\Front\ReviewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+use Illuminate\Http\Request;
 
 /**
  * Admin routes
@@ -101,4 +104,8 @@ Route::namespace('Front')->group(function () {
     Route::get("category/{slug}", 'CategoryController@getCategory')->name('front.category.slug');
     Route::get("search", 'ProductController@search')->name('search.product');
     Route::get("{product}", 'ProductController@show')->name('front.get.product');
+
+    // 新しいレビューを追加するためのルート
+    Route::post('/review/{product}', 'ReviewController@store')->name('front.post.product');
+
 });

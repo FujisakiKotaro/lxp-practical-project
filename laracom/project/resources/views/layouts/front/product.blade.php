@@ -74,6 +74,50 @@
                         <button type="submit" class="btn btn-warning"><i class="fa fa-cart-plus"></i> かごに追加
                         </button>
                     </form>
+                    <div class="review_corner">
+                        <!-- 評価・コメントの一覧を表示 -->
+                        @if(isset($reviews))
+                        <div class="review_list" style="display:flex;">
+                            <div>
+                            @foreach($reviews as $review)
+                                <div style="margin-top: 20px;">
+                                    <div style="color:#eef525;font-size:30px;">{!! $review->stars !!}</div>
+                                    <div class="product_explanation">{{$review->comment}}</div>
+                                </div>
+                            @endforeach
+                            </div>
+                        </div>
+                        @else
+                        <div>reviewsを取得できていません</div>
+                        @endif
+                        <!-- 評価・コメントの入力(ログインしているときのみ) -->
+                        @auth
+                        <div style="margin-top: 10px;">
+                            <form id="review_form" action="{{ route('front.post.product', ['product' => $product->slug]) }}" method="post">
+                            @csrf
+                            <div><span class="evaluation">評価</span><span class="comment">コメント</span></div>
+                            <div>
+                                <span >
+                                    <select name="rank"class="review_rank">
+                                        <option value="5">5</option>
+                                        <option value="4">4</option>
+                                        <option value="3">3</option>
+                                        <option value="2">2</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                </span>
+                                <span><input type="text" maxlength="100" class="review_comment" name="comment" /></span>
+                                <span><input id="review_submit" type="submit" value="登録" /></span>
+                            </div>
+                            </form>
+                            @if(session('success'))
+                                <script>
+                                    alert("{{ session('success') }}");
+                                </script>
+                            @endif
+                        </div>
+                        @endauth
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,6 +132,22 @@
             new Drift(productPane, {
                 paneContainer: paneContainer,
                 inlinePane: false
+            });
+        });
+        //フォームが無効な場合にdisableとする処理
+        document.addEventListener('DOMContentLoaded', function () {
+            var form = document.getElementById('review_form');
+            var submitBtn = document.getElementById('review_submit');
+
+            form.addEventListener('input', function () {
+                // フォームが有効な場合
+                if (form.checkValidity()) {
+                    submitBtn.removeAttribute('disabled');
+                } else {
+                    // フォームが無効な場合
+                    console.log('Button is disabled');
+                    submitBtn.setAttribute('disabled', 'disabled');
+                }
             });
         });
     </script>
