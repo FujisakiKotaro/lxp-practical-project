@@ -80,13 +80,8 @@
                         <div class="review_list" style="display:flex;">
                             <div>
                             @foreach($reviews as $review)
-                                <div style="display:flex; margin-top: 10px;">
-                                    <!-- 星の記述 -->
-                                    @if(isset($review->$stars))
-                                    <div style="color:#eef525;font-size:30px;">{!! $review->$stars !!}</div>
-                                    @else
-                                    <div>starsがありません</div>
-                                    @endif
+                                <div style="margin-top: 20px;">
+                                    <div style="color:#eef525;font-size:30px;">{!! $review->stars !!}</div>
                                     <div class="product_explanation">{{$review->comment}}</div>
                                 </div>
                             @endforeach
