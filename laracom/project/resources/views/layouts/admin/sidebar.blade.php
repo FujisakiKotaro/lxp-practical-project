@@ -101,7 +101,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('admin.orders.index') }}"><i class="fa fa-circle-o"></i> List orders</a></li>
+                    <li><a href="{{ route('admin.orders.index') }}"><i class="fa fa-circle-o"></i> レビュー一覧</a></li>
                 </ul>
             </li>
 
