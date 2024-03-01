@@ -72,8 +72,7 @@ class ProductController extends Controller
             'images',
             'productAttributes',
             'category',
-            'reviews',
-            'stars'
+            'reviews'
         ));
     }
 
