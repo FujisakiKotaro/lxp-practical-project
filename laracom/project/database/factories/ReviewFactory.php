@@ -11,7 +11,7 @@ $factory->define(Review::class, function(Faker\Generator $faker){
 
     return [
         'product_id' => $this->faker->numberBetween(1,5),
-        'user_id' => $this->faker->numberBetween(1,5),
+        'customer_id' => $this->faker->numberBetween(1,5),
         'rank' => $this->faker->numberBetween(1,5),
         'comment' => $this->faker->paragraph
     ];

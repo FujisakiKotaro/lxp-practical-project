@@ -21,7 +21,7 @@ class CreateReviewsTable extends Migration
             $table->unsignedInteger('product_id')->index();
             
             // userID 列のデータ型も integer に指定
-            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('customer_id')->index();
             
             $table->integer('rank');
             $table->text('comment');
@@ -29,7 +29,7 @@ class CreateReviewsTable extends Migration
 
             // 外部制約
             $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('user_id')->references('id')->on('customers');
+            $table->foreign('customer_id')->references('id')->on('customers');
         });
     }
 

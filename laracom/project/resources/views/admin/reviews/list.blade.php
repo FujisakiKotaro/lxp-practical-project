@@ -25,7 +25,11 @@
                             <tr>
                                 <td><a title="Show review">{{ $review->created_at }}</a></td>
                                 <td><a href="{{ route('admin.products.show', $review->product_id) }}">{{ $review->product_id }}</a></td>
-                                <td><a href="{{ route('admin.customers.show', $review->user_id) }}">{{ $review->user_id }}</a></td>
+                                <td>
+                                    <a href="{{ route('admin.customers.show', $review->customer_id) }}">
+                                    <span>{{ $review->name }}</span>
+                                    <span><span>(</span>{{ $review->customer_id }}<span>)</span></span>
+                                </a></td>
                                 <td>{{ $review->rank }}</td>
                                 <td><p class="text-center">{{ $review->comment }}</p></td>
                             </tr>
