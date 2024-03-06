@@ -21,43 +21,27 @@ class ReviewController extends Controller
     private $reviewRepo;
 
     /**
-     * ProductController constructor.
+     * ReviewController constructor.
      *
-     * @param ProductRepositoryInterface $productRepository
+     * @param ReviewRepositoryInterface $reviewRepository
      */
     public function __construct(
-        ReviewRepositoryInterface $productRepository
+        ReviewRepositoryInterface $reviewRepository
     ) {
-        $this->reviewRepo = $productRepository;
-
+        $this->reviewRepo = $reviewRepository;
         $this->middleware(['permission:create-product, guard:employee'], ['only' => ['create', 'store']]);
         $this->middleware(['permission:update-product, guard:employee'], ['only' => ['edit', 'update']]);
         $this->middleware(['permission:delete-product, guard:employee'], ['only' => ['destroy']]);
         $this->middleware(['permission:view-product, guard:employee'], ['only' => ['index', 'show']]);
     }
 
-    // public function index(){
-    //     // $review_list = Review::all();
-    //     $review_list = Review::join('customers', 'customer_id', '=', 'customers.id')
-    //                         ->select('reviews.*', 'customers.name as name')
-    //                         ->get();
-    //     return view('admin.reviews.list', ['reviews' => $review_list]);
-    // }
-
     public function index()
     {
         $list = $this->reviewRepo->listReviews('id');
+        $reviews = $list->all();
 
-        // if (request()->has('q') && request()->input('q') != '') {
-        //     $list = $this->reviewRepo->searchReview(request()->input('q'));
-        // }
-
-        $reviews = $list->map(function (Review $item) {
-            return $this->transformProduct($item);
-        })->all();
-
-        return view('admin.products.list', [
-            'products' => $this->reviewRepo->paginateArrayResults($reviews, 25)
+        return view('admin.reviews.list', [
+            'reviews' => $this->reviewRepo->paginateArrayResults($reviews, 25)
         ]);
     }
 }

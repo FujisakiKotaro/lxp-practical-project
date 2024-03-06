@@ -2,14 +2,9 @@
 
 namespace App\Shop\Reviews\Repositories;
 
-use App\Shop\AttributeValues\AttributeValue;
-use App\Shop\Products\Exceptions\ProductCreateErrorException;
-use App\Shop\Products\Exceptions\ProductUpdateErrorException;
-use App\Shop\Tools\UploadableTrait;
 use Jsdecena\Baserepo\BaseRepository;
 use App\Shop\Brands\Brand;
 use App\Shop\ProductAttributes\ProductAttribute;
-use App\Shop\ProductImages\ProductImage;
 use App\Shop\Products\Exceptions\ProductNotFoundException;
 use App\Shop\Products\Product;
 use App\Shop\Reviews\Repositories\Interfaces\ReviewRepositoryInterface;
@@ -28,7 +23,7 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
 
     /**
      * ProductRepository constructor.
-     * @param Product $product
+     * @param Review $review
      */
     public function __construct(Review $review)
     {
@@ -37,7 +32,7 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
     }
 
     /**
-     * List all the products
+     * List all the reviews
      *
      * @param string $order
      * @param string $sort
@@ -46,16 +41,19 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
      */
     public function listReviews(string $review = 'id', string $sort = 'desc', array $columns = ['*']) : Collection
     {
-        return $this->all($columns, $review, $sort);
+        return DB::table('reviews')
+                ->join('customers', 'customer_id', '=', 'customers.id')
+                ->select('reviews.*', 'customers.name as name')
+                ->orderBy($review, $sort)
+                ->get();
     }
 
     /**
-     * Create the product
+     * Create the review
      *
      * @param array $data
      *
-     * @return Product
-     * @throws ProductCreateErrorException
+     * @return Review
      */
     public function createReview(array $data) : Review
     {
@@ -67,14 +65,13 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
     }
 
     /**
-     * Delete the product
+     * Delete the review
      *
-     * @param Product $product
+     * @param Product $review
      *
      * @return bool
      * @throws \Exception
      * @deprecated
-     * @use removeProduct
      */
     public function deleteReview(Review $review) : bool
     {
@@ -89,17 +86,6 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
     public function removeReview() : bool
     {
         return $this->model->where('id', $this->model->id)->delete();
-    }
-
-
-    /**
-     * @param array $file
-     * @param null $disk
-     * @return bool
-     */
-    public function deleteFile(array $file, $disk = null) : bool
-    {
-        return $this->update(['cover' => null], $file['product']);
     }
 
     /**
@@ -122,66 +108,5 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
         } else {
             return $this->listReviews();
         }
-    }
-
-    /**
-     * @return mixed
-     */
-    // public function findProductImages() : Collection
-    // {
-    //     return $this->model->images()->get();
-    // }
-
-    // /**
-    //  * @param UploadedFile $file
-    //  * @return string
-    //  */
-    // public function saveCoverImage(UploadedFile $file) : string
-    // {
-    //     return $file->store('products', ['disk' => 'public']);
-    // }
-
-    /**
-     * Associate the product attribute to the product
-     *
-     * @param ProductAttribute $productAttribute
-     * @return ProductAttribute
-     */
-    public function saveProductAttributes(ProductAttribute $productAttribute) : ProductAttribute
-    {
-        $this->model->attributes()->save($productAttribute);
-        return $productAttribute;
-    }
-
-
-    /**
-     * @param ProductAttribute $productAttribute
-     * @param AttributeValue ...$attributeValues
-     *
-     * @return Collection
-     */
-    public function saveCombination(ProductAttribute $productAttribute, AttributeValue ...$attributeValues) : Collection
-    {
-        return collect($attributeValues)->each(function (AttributeValue $value) use ($productAttribute) {
-            return $productAttribute->attributesValues()->save($value);
-        });
-    }
-
-    /**
-     * @return Collection
-     */
-    public function listCombinations() : Collection
-    {
-        return $this->model->attributes()->map(function (ProductAttribute $productAttribute) {
-            return $productAttribute->attributesValues;
-        });
-    }
-
-    /**
-     * @param Brand $brand
-     */
-    public function saveBrand(Brand $brand)
-    {
-        $this->model->brand()->associate($brand);
     }
 }

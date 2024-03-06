@@ -34,7 +34,7 @@ use App\Shop\ProductAttributes\Repositories\ProductAttributeRepository;
 use App\Shop\ProductAttributes\Repositories\ProductAttributeRepositoryInterface;
 use App\Shop\Products\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Shop\Products\Repositories\ProductRepository;
-use App\Shop\Products\Repositories\ReviewRepository;
+use App\Shop\Reviews\Repositories\ReviewRepository;
 use App\Shop\Provinces\Repositories\Interfaces\ProvinceRepositoryInterface;
 use App\Shop\Provinces\Repositories\ProvinceRepository;
 use App\Shop\Reviews\Repositories\Interfaces\ReviewRepositoryInterface;
