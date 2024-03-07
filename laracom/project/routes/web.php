@@ -42,6 +42,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['employee'], 'as' => 'admin.
                 Route::resource('categories', 'CategoryController');
                 Route::get('remove-image-category', 'CategoryController@removeImage')->name('category.remove.image');
             });
+            Route::namespace('Reviews')->group(function () {
+                Route::resource('reviews', 'ReviewController');
+            });
             Route::namespace('Orders')->group(function () {
                 Route::resource('orders', 'OrderController');
                 Route::resource('order-statuses', 'OrderStatusController');

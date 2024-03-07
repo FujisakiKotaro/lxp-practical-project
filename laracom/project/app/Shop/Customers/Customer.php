@@ -4,6 +4,7 @@ namespace App\Shop\Customers;
 
 use App\Shop\Addresses\Address;
 use App\Shop\Orders\Order;
+use App\Shop\Reviews\Review;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -63,6 +64,14 @@ class Customer extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'customer_id');
     }
 
     /**

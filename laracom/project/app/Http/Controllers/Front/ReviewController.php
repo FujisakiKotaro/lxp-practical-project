@@ -26,7 +26,7 @@ class ReviewController extends Controller{
         $add_data = new Review();//クエリを作成
         $add_data->rank = $request->input('rank');
         $add_data->product_id = $product_id;
-        $add_data->user_id = $userId;
+        $add_data->customer_id = $userId;
         $add_data->comment = $request->input('comment');
         $add_data->save();// データベースに挿入
 

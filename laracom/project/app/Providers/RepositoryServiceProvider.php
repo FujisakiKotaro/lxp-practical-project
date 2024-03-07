@@ -34,8 +34,10 @@ use App\Shop\ProductAttributes\Repositories\ProductAttributeRepository;
 use App\Shop\ProductAttributes\Repositories\ProductAttributeRepositoryInterface;
 use App\Shop\Products\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Shop\Products\Repositories\ProductRepository;
+use App\Shop\Reviews\Repositories\ReviewRepository;
 use App\Shop\Provinces\Repositories\Interfaces\ProvinceRepositoryInterface;
 use App\Shop\Provinces\Repositories\ProvinceRepository;
+use App\Shop\Reviews\Repositories\Interfaces\ReviewRepositoryInterface;
 use App\Shop\Roles\Repositories\RoleRepository;
 use App\Shop\Roles\Repositories\RoleRepositoryInterface;
 use App\Shop\Shipping\ShippingInterface;
@@ -146,6 +148,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             PermissionRepositoryInterface::class,
             PermissionRepository::class
+        );
+
+        $this->app->bind(
+            ReviewRepositoryInterface::class,
+            ReviewRepository::class
         );
     }
 }
